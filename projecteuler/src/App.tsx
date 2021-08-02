@@ -1,6 +1,8 @@
 import React from 'react';
 import {Link, Route} from "react-router-dom";
 import './App.css';
+import Routes from "./components/Routes/Routes";
+import solved from "./SolvedProblemsList";
 
 const App = () => {
     return (
@@ -9,9 +11,12 @@ const App = () => {
                 <aside className="col-3 bg-light">
                     <h5>Basic</h5>
                     <ul>
-                        <li><Link to="/">Hello World</Link></li>
+                        {solved.map((solved, index) => (
+                            <li><Link to={solved.route}>{solved.problem}: {solved.title}</Link></li>
+                        ))}
                     </ul>
                 </aside>
+                <Routes/>
             </div>
         </div>
     );
