@@ -1,19 +1,10 @@
 import * as React from "react";
-import {Component} from "react";
+import {MultiplesOf3And5Func} from "../../components/1-MultiplesOf3And5/MultiplesOf3And5";
 
 
-const Hello = () => <span>Hello</span>;
-
-class World extends Component {
-    render() {
-        return <span>World</span>;
-    }
-}
 
 export const MultiplesOf3And5 = () => (
-    <h1>
-        <Hello/>
-        &nbsp;
-        <World/>
-    </h1>
+    <>
+        {MultiplesOf3And5Func(10)}
+    </>
 );
