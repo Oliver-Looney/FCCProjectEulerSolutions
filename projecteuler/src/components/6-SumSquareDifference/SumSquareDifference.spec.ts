@@ -1,8 +1,22 @@
 import {
     getSquareOfSumToN,
+    getSumOfSquaresToN,
     SumSquareDifferenceFunc
 } from "./SumSquareDifference";
 import assert from "assert";
+
+
+describe("testing SquareOfSumToN func", () => {
+    it("testing single digits", () => {
+        assert.equal(getSumOfSquaresToN(2), 5);
+        assert.equal(getSumOfSquaresToN(5), 55);
+        assert.equal(getSumOfSquaresToN(9), 285);
+    });
+    it("testing double digits", () => {
+        assert.equal(getSumOfSquaresToN(10), 385);
+    });
+
+});
 
 
 describe("testing getSquareOfSumToN func", () => {

@@ -1,11 +1,17 @@
 export function getSumOfSquaresToN(input: number) {
-    return -1;
+    let result = 0;
+
+    for (let i = input; i > 0; i--) {
+        result += i ** 2;
+    }
+
+    return result;
 }
 
 export function SumSquareDifferenceFunc(input: number) {
     const squareOfSum = getSquareOfSumToN(input);
     const sumOfSquare = getSumOfSquaresToN(input);
-    return sumOfSquare - squareOfSum;
+    return squareOfSum - sumOfSquare;
 }
 
 export function getSquareOfSumToN(N: number) {
