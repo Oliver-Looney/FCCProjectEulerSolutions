@@ -1,7 +1,29 @@
 import {
-    nthPrimefunc
+    nthPrimefunc,
+    isPrime
 } from "./10001stPrime";
 import assert from "assert";
+
+describe("testing isPrime func", () => {
+    it("inputting 2", () => {
+        assert.equal(isPrime(2), true);
+    });
+    it("inputting 3", () => {
+        assert.equal(isPrime(3), true);
+    });
+    it("inputting 4", () => {
+        assert.equal(isPrime(4), false);
+    });
+    it("inputting 5", () => {
+        assert.equal(isPrime(5), true);
+    });
+    it("inputting 100", () => {
+        assert.equal(isPrime(100), false);
+    });
+
+
+})
+
 
 describe("FCC tests", () => {
     it('should 6=>13', () => {
