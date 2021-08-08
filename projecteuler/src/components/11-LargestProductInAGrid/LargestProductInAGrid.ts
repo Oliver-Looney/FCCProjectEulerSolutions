@@ -14,27 +14,41 @@ function getMaxProduct(grid: number[][], outerI: number, outerJ: number, innerI:
     return maxProduct;
 }
 
-export function largestProductInAGridFunc(grid: number[][]) {
+function getInnerArray(sizeOfAdjacientNumbers: number): number[][] {
+    const indexes = new Array(sizeOfAdjacientNumbers);
+    const indexesOf0 = new Array(sizeOfAdjacientNumbers);
+    const reversedIndexesToAdd = new Array(sizeOfAdjacientNumbers);
+    for (let i = 0; i < indexes.length; i++) {
+        indexes[i] = i;
+        indexesOf0[i] = 0
+        reversedIndexesToAdd[i] = sizeOfAdjacientNumbers - 1 - i;
+    }
+    return [indexes, indexesOf0, reversedIndexesToAdd];
+}
+
+export function largestProductInAGridFunc(grid: number[][], sizeOfAdjacientNumbers: number = 4) {
+    const [indexesToAdd, indexesOf0, reversedIndexesToAdd] = getInnerArray(sizeOfAdjacientNumbers);
+
     const maxVerticalProduct = getMaxProduct(grid,
-        -3,
+        -sizeOfAdjacientNumbers + 1,
         0,
-        [0, 1, 2, 3],
-        [0, 0, 0, 0]);
+        indexesToAdd,
+        indexesOf0);
     const maxHorizontalProduct = getMaxProduct(grid,
         0,
-        -3,
-        [0, 0, 0, 0],
-        [0, 1, 2, 3]);
+        -sizeOfAdjacientNumbers + 1,
+        indexesOf0,
+        indexesToAdd);
     const maxLDiagonalProduct = getMaxProduct(grid,
-        -3,
-        -3,
-        [0, 1, 2, 3],
-        [0, 1, 2, 3]);
+        -sizeOfAdjacientNumbers + 1,
+        -sizeOfAdjacientNumbers + 1,
+        indexesToAdd,
+        indexesToAdd);
     const maxRDiagonalProduct = getMaxProduct(grid,
-        -3,
-        -3,
-        [3, 2, 1, 0],
-        [0, 1, 2, 3]);
+        -sizeOfAdjacientNumbers + 1,
+        -sizeOfAdjacientNumbers + 1,
+        reversedIndexesToAdd,
+        indexesToAdd);
     return Math.max(maxVerticalProduct, maxHorizontalProduct, maxLDiagonalProduct, maxRDiagonalProduct);
 }
 
