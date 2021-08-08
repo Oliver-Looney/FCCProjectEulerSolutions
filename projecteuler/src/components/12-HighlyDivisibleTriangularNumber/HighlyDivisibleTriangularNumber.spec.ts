@@ -1,6 +1,15 @@
 import assert from "assert";
-import {HighlyDivisibleTriangularNumberFunc} from "./HighlyDivisibleTriangularNumber";
+import {
+    getNumOfDivisors,
+    HighlyDivisibleTriangularNumberFunc
+} from "./HighlyDivisibleTriangularNumber";
 
+
+describe("Testing get num of divisors", () => {
+    it("Testing 6", () => {
+        assert.equal(getNumOfDivisors(6), 4);
+    });
+});
 
 describe("Testing FCC tests", () => {
     it("5=>28", () => {
@@ -18,4 +27,4 @@ describe("Testing FCC tests", () => {
     it("500=>76576500", () => {
         assert.equal(HighlyDivisibleTriangularNumberFunc(500), 76576500);
     });
-})
+});
