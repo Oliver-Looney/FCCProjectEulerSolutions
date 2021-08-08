@@ -5,7 +5,7 @@ export function SummationOfPrimesFunc(input: number) {
     let primes = [2, 3];
 
     let currentIndex = 6;
-    while (input < currentIndex) {
+    while (input > currentIndex + 2) {
         if (isPrime(currentIndex - 1, primes)) {
             primes.push(currentIndex - 1);
         }
@@ -14,7 +14,10 @@ export function SummationOfPrimesFunc(input: number) {
         }
         currentIndex += 6;
     }
-    let total = primes.reduce((a, b) => a + b, 0);
+    let total = 0;
+    for (let i = 0; i < primes.length; i++) {
+        total += primes[i];
+    }
     return total;
 }
 
