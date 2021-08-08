@@ -1,24 +1,26 @@
 export function getNumOfDivisors(currentTriangularNum: number) {
     let count = 0;
     for (let i = 1; i < (currentTriangularNum / 2) + 1; i++) {
-        if (currentTriangularNum % i) {
+        if (currentTriangularNum % i === 0) {
             count++;
         }
     }
-    return count;
+    return count + 1;
 }
 
+export function getNthTriangularNumber(N: number) {
+    return (N * (N + 1) / 2);
+}
+
+
 export function HighlyDivisibleTriangularNumberFunc(input: number) {
-    let currentTriangularNum = 1;
-    let counter = 2;
-    let currentNumOfDivisors = 0;
     let index = 1;
-    do {
-        currentNumOfDivisors = getNumOfDivisors(currentTriangularNum);
-        currentTriangularNum += counter;
-        counter += index;
+    while (true) {
+
+        const currentTriangularNum = getNthTriangularNumber(index);
+        if (getNumOfDivisors(currentTriangularNum) > input) {
+            return currentTriangularNum;
+        }
         index++;
     }
-    while (currentNumOfDivisors <= input);
-    return currentTriangularNum
 }
