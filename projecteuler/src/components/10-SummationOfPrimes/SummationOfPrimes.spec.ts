@@ -1,5 +1,5 @@
 import {
-    isPrime, returningEdgeCases,
+    isPrime, returningEdgeCases, sieveOfErato,
     SummationOfPrimesFunc
 } from "./SummationOfPrimes";
 import assert from "assert";
@@ -42,6 +42,15 @@ describe("testing isPrime", () => {
     });
 });
 
+describe("testing sieve of Eratosthenes", () => {
+    it("testing up to 5", () => {
+        const result = sieveOfErato(5);
+        assert.equal(result[0], 2);
+        assert.equal(result[1], 3);
+        assert.equal(result[2], 5);
+        assert.equal(result.length, 3);
+    })
+});
 
 describe("Running FCC tests", () => {
     it("17=>41", () => {

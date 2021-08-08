@@ -1,18 +1,16 @@
 export function SummationOfPrimesFunc(input: number) {
-    if (returningEdgeCases(input) != -1) {
+    if (returningEdgeCases(input) !== -1) {
         return returningEdgeCases(input);
     }
     let primes = [2, 3];
 
-    let currentIndex = 6;
-    while (input > currentIndex + 2) {
+    for (let currentIndex = 6; currentIndex < input - 2; currentIndex += 6) {
         if (isPrime(currentIndex - 1, primes)) {
             primes.push(currentIndex - 1);
         }
         if (isPrime(currentIndex + 1, primes)) {
             primes.push(currentIndex + 1);
         }
-        currentIndex += 6;
     }
     let total = 0;
     for (let i = 0; i < primes.length; i++) {
@@ -21,6 +19,22 @@ export function SummationOfPrimesFunc(input: number) {
     return total;
 }
 
+export function sieveOfErato(max: number) {
+    let sieve = new Array(max + 1).fill(true);
+    sieve[0] = false;
+    sieve[1] = false;
+    for (let i = 2; i <= Math.sqrt(max); i++) {
+        if (sieve[i]) {
+            for (let j = i ** 2; j < max; j += i) {
+                sieve[j] = false;
+            }
+        }
+    }
+    const primes = sieve
+        .map((element, index) => element === true ? index : -1)
+        .filter(index => index !== -1);
+    return primes;
+}
 
 export function returningEdgeCases(input: number) {
     if (input < 3) {
