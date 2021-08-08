@@ -1,7 +1,47 @@
 import {
+    isPrime, returningEdgeCases,
     SummationOfPrimesFunc
 } from "./SummationOfPrimes";
 import assert from "assert";
+
+
+describe("testing returningEdgeCases", () => {
+    it("negative numbers", () => {
+        assert.equal(returningEdgeCases(-1), 0);
+    });
+    it("0 ", () => {
+        assert.equal(returningEdgeCases(0), 0);
+    });
+    it(" 2", () => {
+        assert.equal(returningEdgeCases(2), 0);
+    });
+    it(" 3", () => {
+        assert.equal(returningEdgeCases(3), 2);
+    });
+    it(" 4", () => {
+        assert.equal(returningEdgeCases(4), -1);
+    });
+});
+
+
+describe("testing isPrime", () => {
+    it("testing 5", () => {
+        assert.equal(isPrime(5, [2, 3]), true)
+    });
+    it("testing 6", () => {
+        assert.equal(isPrime(6, [2, 3, 5]), false)
+    });
+    it("testing 7", () => {
+        assert.equal(isPrime(7, [2, 3, 5]), true)
+    });
+    it("testing 8", () => {
+        assert.equal(isPrime(8, [2, 3, 5, 7]), false)
+    });
+    it("testing 9", () => {
+        assert.equal(isPrime(8, [2, 3, 5, 7]), false)
+    });
+});
+
 
 describe("Running FCC tests", () => {
     it("17=>41", () => {
