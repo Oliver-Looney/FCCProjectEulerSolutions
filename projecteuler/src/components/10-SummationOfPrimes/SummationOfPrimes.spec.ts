@@ -43,8 +43,8 @@ describe("testing isPrime", () => {
 });
 
 describe("testing sieve of Eratosthenes", () => {
-    it("testing up to 5", () => {
-        const result = sieveOfErato(5);
+    it("testing up to 6", () => {
+        const result = sieveOfErato(6);
         assert.equal(result[0], 2);
         assert.equal(result[1], 3);
         assert.equal(result[2], 5);
