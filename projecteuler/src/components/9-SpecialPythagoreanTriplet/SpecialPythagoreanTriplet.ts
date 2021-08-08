@@ -1,14 +1,13 @@
 export function SpecialPythagoreanTripletFunc(input: number) {
     for (let m = 2; m > 0; m++) {
-        for (let n = 1; n < m; n++) {
-            //if (IsRelativelyPrimeTo(m, n)) {
-            const [a, b, c] = calcTripleFromMN(m, n);
-            const total = a + b + c;
-            if (input % total == 0) {
-                const product = (a * b * c) * (input / total) ** 3;
-                return product;
+        for (let n = 1 + (m % 2); n < m; n += 2) {
+            if (IsRelativelyPrimeTo(m, n)) {
+                const [a, b, c] = calcTripleFromMN(m, n);
+                const total = a + b + c;
+                if (input % total === 0) {
+                    return (a * b * c) * (input / total) ** 3;
+                }
             }
-            //}
         }
     }
     return -1
