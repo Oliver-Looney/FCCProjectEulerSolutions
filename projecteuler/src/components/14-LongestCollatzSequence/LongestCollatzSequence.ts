@@ -24,6 +24,7 @@ export function LongestCollatzSequenceFunc(limit: number) {
 export function getKeyOfMaxValue(myMap: Map<number, number>) {
     let maxValue = 0;
     let keyOfMaxValue = 0;
+    //JS: for (const [key, value] of myMap.entries()) {
     // @ts-ignore
     for (let [key, value] of myMap) {
         if (value > maxValue) {
