@@ -12,7 +12,6 @@ export function getNthTriangularNumber(N: number) {
     return (N * (N + 1) / 2);
 }
 
-
 function getNumOfDivisorsOfABProduct(numOfDivisorsOfA: number, numOfDivisorsOfB: number) {
     numOfDivisorsOfA = numOfDivisorsOfA - 1;
     numOfDivisorsOfB = numOfDivisorsOfB - 1;
