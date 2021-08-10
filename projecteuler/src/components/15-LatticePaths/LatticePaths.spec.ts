@@ -1,5 +1,13 @@
-import {LatticePathsFunc} from "./LatticePaths";
+import {getBinomialCoefficient, LatticePathsFunc} from "./LatticePaths";
 import assert from "assert";
+
+
+describe("Testing get binomial coeff", () => {
+    it("10,2=>45", () => {
+        assert.equal(getBinomialCoefficient(10, 2), 45);
+    })
+});
+
 
 describe("FCC tests", () => {
     it("2=>6", () => {
