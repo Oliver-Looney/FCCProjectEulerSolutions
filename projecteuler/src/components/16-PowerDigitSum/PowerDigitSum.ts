@@ -1,19 +1,30 @@
 export function PowerDigitSumFunc(exponent: number) {
-    const powerOfTwoString = getPowerOfTwo(exponent).toString();
     let result = 0;
-    for (let i = 0; i < powerOfTwoString.length; i++) {
-        result += parseInt(powerOfTwoString[i]);
+    let mySumInArray = new Array<number>(Math.ceil(Math.log((2 ** exponent) + 1) / Math.LN10));
+    let count = 1;
+    mySumInArray[0] = 1;
+    let carry = 0;
+    do {
+        carry = 0;
+        for (let i = 0; i < mySumInArray.length; i++) {
+            let oldValue = mySumInArray[i];
+            if (typeof oldValue != "number") {
+                oldValue = 0;
+            }
+            const newValue = (oldValue * 2) + carry;
+            if (newValue >= 10) {
+                mySumInArray[i] = (newValue % 10);
+                carry = 1;
+            } else {
+                mySumInArray[i] = newValue;
+                carry = 0;
+            }
+        }
+        count++;
     }
-    return result;
-}
-
-export function getPowerOfTwo(exponent: number) {
-    if (exponent === 0) {
-        return 1;
-    }
-    let result = 1;
-    for (let i = 1; i <= exponent; i++) {
-        result *= 2;
+    while (count <= exponent);
+    for (let i = 0; i < mySumInArray.length; i++) {
+        result += mySumInArray[i];
     }
     return result;
 }
