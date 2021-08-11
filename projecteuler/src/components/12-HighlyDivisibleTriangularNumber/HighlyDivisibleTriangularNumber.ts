@@ -29,18 +29,36 @@ export function HighlyDivisibleTriangularNumberFunc(input: number) {
     let numOfDivisorsOfTriNum = 0;
     let numOfDivisorsOfA = 0;
     let numOfDivisorsOfB = 0;
+    let previousCalc = new Map();
     do {
         index++;
         if (index % 2 === 0) {
-            numOfDivisorsOfA = getNumOfDivisors(index / 2);
-            numOfDivisorsOfB = getNumOfDivisors(index + 1);
+            //numOfDivisorsOfA = getNumOfDivisors(index / 2);
+            previousCalc = testIfInMap(previousCalc, index / 2);
+            numOfDivisorsOfA = previousCalc.get(index / 2)
+            //numOfDivisorsOfB = getNumOfDivisors(index + 1);
+            previousCalc = testIfInMap(previousCalc, index + 1);
+            numOfDivisorsOfB = previousCalc.get(index + 1);
         } else {
-            numOfDivisorsOfA = getNumOfDivisors(index);
-            numOfDivisorsOfB = getNumOfDivisors((index + 1) / 2);
+            //numOfDivisorsOfA = getNumOfDivisors(index);
+            previousCalc = testIfInMap(previousCalc, index);
+            numOfDivisorsOfA = previousCalc.get(index)
+            //numOfDivisorsOfB = getNumOfDivisors((index + 1) / 2);
+            previousCalc = testIfInMap(previousCalc, (index + 1) / 2);
+            numOfDivisorsOfB = previousCalc.get((index + 1) / 2);
         }
 
         numOfDivisorsOfTriNum = numOfDivisorsOfA + numOfDivisorsOfB - 1 + getNumOfDivisorsOfABProduct(numOfDivisorsOfA, numOfDivisorsOfB);
     }
     while (numOfDivisorsOfTriNum < input);
     return getNthTriangularNumber(index)
+}
+
+export function testIfInMap(previousCalc: Map<number, number>, numberToCalc: number) {
+    if (!previousCalc.has(numberToCalc)) {
+        const numberOfDivisorsOfNumberToCalc = getNumOfDivisors((numberToCalc));
+        previousCalc.set(numberToCalc, numberOfDivisorsOfNumberToCalc);
+    }
+
+    return previousCalc;
 }
