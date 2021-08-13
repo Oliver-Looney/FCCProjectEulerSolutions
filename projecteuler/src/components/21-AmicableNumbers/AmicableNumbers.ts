@@ -6,17 +6,21 @@ function getMapOfNumbersBelowN(n: number) {
     return mapOfNumbersToSumOfProperDivisors;
 }
 
-export function AmicableNumbersFunc(n: number) {
-    let mapOfNumbersToSumOfProperDivisors = getMapOfNumbersBelowN(n);
+function getTotalOfPairs(n: number, mapOfNumbersToSumOfProperDivisors: Map<number, number>) {
     let result = 0;
     for (let i = 0; i < n; i++) {
-        const checkI = mapOfNumbersToSumOfProperDivisors.get(i);
-        if (mapOfNumbersToSumOfProperDivisors.get(<number>checkI) === i) {
-            if (checkI !== i) {
-                result = result + <number>checkI + i;
+        if (mapOfNumbersToSumOfProperDivisors.get(<number>mapOfNumbersToSumOfProperDivisors.get(i)) === i) {
+            if (mapOfNumbersToSumOfProperDivisors.get(i) !== i) {
+                result = result + <number>mapOfNumbersToSumOfProperDivisors.get(i) + i;
             }
         }
     }
+    return result;
+}
+
+export function AmicableNumbersFunc(n: number) {
+    let mapOfNumbersToSumOfProperDivisors = getMapOfNumbersBelowN(n);
+    let result = getTotalOfPairs(n, mapOfNumbersToSumOfProperDivisors);
     return result / 2;
 }
 
