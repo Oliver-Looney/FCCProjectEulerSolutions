@@ -1,9 +1,24 @@
 import assert from "assert";
 import {
+    getABPairFromIndex,
     getNthTriangularNumber,
     getNumOfDivisors,
     HighlyDivisibleTriangularNumberFunc
 } from "./HighlyDivisibleTriangularNumber";
+
+
+describe("Testing getABPair", () => {
+    it("testing even index", () => {
+        const result = getABPairFromIndex(4);
+        assert.equal(result[0], 2);
+        assert.equal(result[1], 5);
+    });
+    it("testing odd index", () => {
+        const result = getABPairFromIndex(5);
+        assert.equal(result[0], 5);
+        assert.equal(result[1], 3);
+    });
+});
 
 
 describe("Testing get num of divisors", () => {

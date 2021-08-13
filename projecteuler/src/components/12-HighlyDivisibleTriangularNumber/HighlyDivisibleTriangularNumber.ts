@@ -1,30 +1,21 @@
-export function getNumOfDivisors(currentTriangularNum: number) {
+export function getNumOfDivisors(testNumber: number) {
     let count = 0;
-    for (let i = 1; i < (currentTriangularNum / 2) + 1; i++) {
-        if (currentTriangularNum % i === 0) {
-            count++;
+    for (let i = 1; i < Math.sqrt(testNumber); i++) {
+        if (testNumber % i === 0) {
+            count += 2;
         }
     }
-    return count + 1;
+    if (testNumber % Math.sqrt(testNumber) === 0) {
+        count++;
+    }
+    return count;
 }
 
 export function getNthTriangularNumber(N: number) {
     return (N * (N + 1) / 2);
 }
 
-function getNumOfDivisorsOfABProduct(numOfDivisorsOfA: number, numOfDivisorsOfB: number) {
-    numOfDivisorsOfA = numOfDivisorsOfA - 1;
-    numOfDivisorsOfB = numOfDivisorsOfB - 1;
-    let count = 0;
-    for (let i = 0; i < numOfDivisorsOfA; i++) {
-        for (let j = 0; j < numOfDivisorsOfB; j++) {
-            count++;
-        }
-    }
-    return count;
-}
-
-function getABPairFromIndex(index: number) {
+export function getABPairFromIndex(index: number) {
     if (index % 2 === 0) {
         return [index / 2, index + 1];
     } else {
@@ -43,7 +34,7 @@ export function HighlyDivisibleTriangularNumberFunc(input: number) {
         for (let i = 0; i < 2; i++) {
             previousCalc = testIfInMap(previousCalc, ABPair[i]);
         }
-        numOfDivisorsOfTriNum = previousCalc.get(ABPair[0]) + previousCalc.get(ABPair[1]) - 1 + getNumOfDivisorsOfABProduct(previousCalc.get(ABPair[0]), previousCalc.get(ABPair[1]));
+        numOfDivisorsOfTriNum = previousCalc.get(ABPair[0]) + previousCalc.get(ABPair[1]) - 1 + ((previousCalc.get(ABPair[0]) - 1) * (previousCalc.get(ABPair[1]) - 1));
     }
     while (numOfDivisorsOfTriNum < input);
     return getNthTriangularNumber(index);
