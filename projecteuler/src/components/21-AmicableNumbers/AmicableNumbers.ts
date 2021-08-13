@@ -9,9 +9,10 @@ function getMapOfNumbersBelowN(n: number) {
 function getTotalOfPairs(n: number, mapOfNumbersToSumOfProperDivisors: Map<number, number>) {
     let result = 0;
     for (let i = 0; i < n; i++) {
-        if (mapOfNumbersToSumOfProperDivisors.get(<number>mapOfNumbersToSumOfProperDivisors.get(i)) === i) {
-            if (mapOfNumbersToSumOfProperDivisors.get(i) !== i) {
-                result = result + <number>mapOfNumbersToSumOfProperDivisors.get(i) + i;
+        const contentsOfI = mapOfNumbersToSumOfProperDivisors.get(i) as number;
+        if (mapOfNumbersToSumOfProperDivisors.get(contentsOfI) === i) {
+            if (contentsOfI !== i) {
+                result = result + contentsOfI + i;
             }
         }
     }
@@ -19,8 +20,8 @@ function getTotalOfPairs(n: number, mapOfNumbersToSumOfProperDivisors: Map<numbe
 }
 
 export function AmicableNumbersFunc(n: number) {
-    let mapOfNumbersToSumOfProperDivisors = getMapOfNumbersBelowN(n);
-    let result = getTotalOfPairs(n, mapOfNumbersToSumOfProperDivisors);
+    const mapOfNumbersToSumOfProperDivisors = getMapOfNumbersBelowN(n);
+    const result = getTotalOfPairs(n, mapOfNumbersToSumOfProperDivisors);
     return result / 2;
 }
 
