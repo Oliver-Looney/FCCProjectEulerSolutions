@@ -1,5 +1,28 @@
-import {FactorialDigitSumFunc} from "./FactorialDigitSum";
+import {FactorialDigitSumFunc, multiplyAxB} from "./FactorialDigitSum";
 import assert from "assert";
+
+
+describe("Testing multiplying function", () => {
+    it("2x3=>", () => {
+        assert.equal(multiplyAxB([2], [3]), [6])
+    });
+    it("2x6=>", () => {
+        assert.equal(multiplyAxB([2], [6]), [1, 2])
+    });
+    it("5x7=>", () => {
+        assert.equal(multiplyAxB([5], [7]), [3, 5])
+    });
+    it("50x7=>", () => {
+        assert.equal(multiplyAxB([5, 0], [7]), [3, 5, 0])
+    });
+    it("51x7=>", () => {
+        assert.equal(multiplyAxB([5, 1], [7]), [3, 5, 7])
+    });
+    it("50x70=>", () => {
+        assert.equal(multiplyAxB([5, 0], [7, 0]), [3, 5, 0, 0])
+    });
+});
+
 
 describe("FCC Tests", () => {
     it("10=>27", () => {
