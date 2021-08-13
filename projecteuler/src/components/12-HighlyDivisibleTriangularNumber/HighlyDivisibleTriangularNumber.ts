@@ -24,41 +24,34 @@ function getNumOfDivisorsOfABProduct(numOfDivisorsOfA: number, numOfDivisorsOfB:
     return count;
 }
 
+function getABPairFromIndex(index: number) {
+    if (index % 2 === 0) {
+        return [index / 2, index + 1];
+    } else {
+        return [index, (index + 1) / 2];
+    }
+}
+
 export function HighlyDivisibleTriangularNumberFunc(input: number) {
     let index = 0;
-    let numOfDivisorsOfTriNum = 0;
-    let numOfDivisorsOfA = 0;
-    let numOfDivisorsOfB = 0;
+    let numOfDivisorsOfTriNum: number;
+    let ABPair: number[];
     let previousCalc = new Map();
     do {
         index++;
-        if (index % 2 === 0) {
-            //numOfDivisorsOfA = getNumOfDivisors(index / 2);
-            previousCalc = testIfInMap(previousCalc, index / 2);
-            numOfDivisorsOfA = previousCalc.get(index / 2)
-            //numOfDivisorsOfB = getNumOfDivisors(index + 1);
-            previousCalc = testIfInMap(previousCalc, index + 1);
-            numOfDivisorsOfB = previousCalc.get(index + 1);
-        } else {
-            //numOfDivisorsOfA = getNumOfDivisors(index);
-            previousCalc = testIfInMap(previousCalc, index);
-            numOfDivisorsOfA = previousCalc.get(index)
-            //numOfDivisorsOfB = getNumOfDivisors((index + 1) / 2);
-            previousCalc = testIfInMap(previousCalc, (index + 1) / 2);
-            numOfDivisorsOfB = previousCalc.get((index + 1) / 2);
+        ABPair = getABPairFromIndex(index);
+        for (let i = 0; i < 2; i++) {
+            previousCalc = testIfInMap(previousCalc, ABPair[i]);
         }
-
-        numOfDivisorsOfTriNum = numOfDivisorsOfA + numOfDivisorsOfB - 1 + getNumOfDivisorsOfABProduct(numOfDivisorsOfA, numOfDivisorsOfB);
+        numOfDivisorsOfTriNum = previousCalc.get(ABPair[0]) + previousCalc.get(ABPair[1]) - 1 + getNumOfDivisorsOfABProduct(previousCalc.get(ABPair[0]), previousCalc.get(ABPair[1]));
     }
     while (numOfDivisorsOfTriNum < input);
-    return getNthTriangularNumber(index)
+    return getNthTriangularNumber(index);
 }
 
 export function testIfInMap(previousCalc: Map<number, number>, numberToCalc: number) {
     if (!previousCalc.has(numberToCalc)) {
-        const numberOfDivisorsOfNumberToCalc = getNumOfDivisors((numberToCalc));
-        previousCalc.set(numberToCalc, numberOfDivisorsOfNumberToCalc);
+        previousCalc.set(numberToCalc, getNumOfDivisors((numberToCalc)));
     }
-
     return previousCalc;
 }
