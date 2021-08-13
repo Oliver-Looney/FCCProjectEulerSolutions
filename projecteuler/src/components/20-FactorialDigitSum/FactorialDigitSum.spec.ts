@@ -1,5 +1,61 @@
-import {FactorialDigitSumFunc, multiplyAxB} from "./FactorialDigitSum";
+import {
+    addAB,
+    FactorialDigitSumFunc,
+    getNumberAsNumberArray
+    , multiplyAxB
+} from "./FactorialDigitSum";
 import assert from "assert";
+
+
+describe("testing adding function", () => {
+    it("[2],[2]=>[4]", () => {
+        const result = addAB([2], [2])
+        assert.equal(result.length, 1);
+        assert.equal(result[0], 4);
+    });
+    it("[5],[5]=>[0,1]", () => {
+        const result = addAB([5], [5])
+
+        assert.equal(result.length, 2);
+        assert.equal(result[0], 0);
+        assert.equal(result[1], 1);
+    });
+    it("[5,1],[6,1]=>[1,3]", () => {
+        const result = addAB([5, 1], [6, 1])
+        assert.equal(result.length, 2);
+        assert.equal(result[0], 1);
+        assert.equal(result[1], 3);
+    });
+    it("[2,5,1],[6,1]=>[8,6,1]", () => {
+        const result = addAB([2, 5, 1], [6, 1])
+        //assert.equal(result,[]);
+        assert.equal(result.length, 3);
+        assert.equal(result[0], 8);
+        assert.equal(result[1], 6);
+        assert.equal(result[2], 1);
+    });
+});
+
+describe("Testing getNumberAsNumberArray", () => {
+    it("2=>[2]", () => {
+        const result = getNumberAsNumberArray(2);
+        assert.equal(result.length, 1);
+        assert.equal(result[0], 2);
+    });
+    it("10=>[0,1]", () => {
+        const result = getNumberAsNumberArray(10);
+        assert.equal(result.length, 2);
+        assert.equal(result[0], 0);
+        assert.equal(result[1], 1);
+    });
+    it("100=>[0,0,1]", () => {
+        const result = getNumberAsNumberArray(100);
+        assert.equal(result.length, 3);
+        assert.equal(result[0], 0);
+        assert.equal(result[1], 0);
+        assert.equal(result[2], 1);
+    });
+});
 
 
 describe("Testing multiplying function", () => {
