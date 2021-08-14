@@ -1,6 +1,12 @@
-import {NamesScoresFunc} from "./NamesScores";
+import {getTotalOfWord, NamesScoresFunc} from "./NamesScores";
 import assert from "assert";
 
+
+describe("Testing total letter", () => {
+    it("Testing colin=>53", () => {
+        assert.equal(getTotalOfWord("COLIN"), 53);
+    });
+});
 
 describe("FCC tests", () => {
     it("test1=>791", () => {
