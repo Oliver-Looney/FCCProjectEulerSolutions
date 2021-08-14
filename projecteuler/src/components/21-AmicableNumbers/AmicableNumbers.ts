@@ -1,7 +1,7 @@
 function getMapOfNumbersBelowN(n: number) {
     let mapOfNumbersToSumOfProperDivisors = new Map<number, number>();
-    for (let i = 0; i < n; i++) {
-        mapOfNumbersToSumOfProperDivisors = testIfInMap(mapOfNumbersToSumOfProperDivisors, i);
+    for (let i = 1; i < n; i++) {
+        mapOfNumbersToSumOfProperDivisors.set(i, getSumOfDivisors(i))
     }
     return mapOfNumbersToSumOfProperDivisors;
 }
@@ -35,9 +35,4 @@ export function getSumOfDivisors(testNumber: number) {
     return sum;
 }
 
-export function testIfInMap(previousCalc: Map<number, number>, numberToCalc: number) {
-    if (!previousCalc.has(numberToCalc)) {
-        previousCalc.set(numberToCalc, getSumOfDivisors((numberToCalc)));
-    }
-    return previousCalc;
-}
+//memo sum of divisors to reduce time???
