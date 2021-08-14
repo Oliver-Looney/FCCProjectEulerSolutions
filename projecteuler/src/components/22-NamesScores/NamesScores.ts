@@ -35,6 +35,7 @@ export function getTotalOfWord(word: string) {
     let total = 0;
     const alphabet = getAlphabet();
     for (let letter of word) {
+        // @ts-ignore
         total += alphabet.get(letter);
     }
     return total;
