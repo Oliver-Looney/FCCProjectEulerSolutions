@@ -21,5 +21,21 @@ export function getAbundantNumbersUpToN(limit: number) {
 
 export function NonAbunduntSumsFunc(input: number) {
     const abundantNumbers = getAbundantNumbersUpToN(input + 1);
-    return -1;
+    //return  abundantNumbers;
+    let total = 0;
+    for (let i = 23; i < input; i++) {
+        let flag = true;
+        let j = 0;
+        while (flag && j <= (abundantNumbers.length / 2)) {
+            if (abundantNumbers.includes(i - abundantNumbers[j])) {
+                flag = false;
+            }
+            j++;
+        }
+        //return flag;
+        if (flag) {
+            total += i;
+        }
+    }
+    return total;
 }
