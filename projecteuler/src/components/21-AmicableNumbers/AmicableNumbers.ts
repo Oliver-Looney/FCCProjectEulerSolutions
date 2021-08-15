@@ -26,10 +26,11 @@ export function AmicableNumbersFunc(n: number) {
 }
 
 export function getSumOfDivisors(testNumber: number) {
-    let sum = 0;
-    for (let i = 1; i <= (testNumber / 2); i++) {
+    let sum = 1;
+    for (let i = 2; i <= Math.sqrt(testNumber); i++) {
         if (testNumber % i === 0) {
             sum += i;
+            sum += testNumber / i;
         }
     }
     return sum;
