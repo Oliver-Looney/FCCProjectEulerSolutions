@@ -20,24 +20,37 @@ export function getAbundantNumbersUpToN(limit: number) {
 }
 
 export function NonAbunduntSumsFunc(input: number) {
-    const abundantNumbers = getAbundantNumbersUpToN(input + 1);
-    //return  abundantNumbers;
-    let total = 0;
-    for (let i = 23; i < input; i++) {
-        let flag = true;
-        let j = 0;
-        while (flag && j <= (abundantNumbers.length / 2)) {
-            if (abundantNumbers.includes(i - abundantNumbers[j])) {
-                flag = false;
-            }
-            j++;
-        }
-        //return flag;
-        if (flag) {
-            total += i;
+
+    const limit = input;
+    let abundant: number[] = [];
+    const primes = getPrimes(limit);
+
+
+//find all abundant numbers
+    for (let i = 2; i <= limit; i++) {
+        if (sumOfFactorsPrime(i, primes) > i) {
+            abundant.push(i);
         }
     }
-    return total;
+
+    let canBeWrittenAsAbundant: boolean[] = new Array(limit + 1);
+    for (let i = 0; i < abundant.length; i++) {
+        for (let j = i; j < abundant.length; j++) {
+            if (abundant[i] + abundant[j] <= limit) {
+                canBeWrittenAsAbundant[abundant[i] + abundant[j]] = true;
+            } else {
+                break;
+            }
+        }
+    }
+
+    let sum = 0;
+    for (let i = 1; i <= limit; i++) {
+        if (!canBeWrittenAsAbundant[i]) {
+            sum += i;
+        }
+    }
+    return sum;
 }
 
 
@@ -56,3 +69,34 @@ function getPrimes(maxNumber: number) {
     }
     return primes;
 }
+
+
+function sumOfFactorsPrime(i: number, primes: number[]) {
+    let n = i;
+    let sum = 1;
+    let currentPrime = primes[0];
+    let j: number;
+    let count = 0;
+    if (n < 4) {
+        return 1;
+    }
+    while (currentPrime * currentPrime <= n && n > 1 && count < primes.length) {
+        currentPrime = primes[count];
+        count++;
+        if (n % currentPrime === 0) {
+            j = currentPrime * currentPrime;
+            n = n / currentPrime;
+            while (n % currentPrime === 0) {
+                j = j * currentPrime;
+                n = n / currentPrime;
+            }
+            sum = sum * (j - 1) / (currentPrime - 1);
+        }
+    } //A prime factor larger than the square root remains if (n > 1)//
+    if (n > 1) {
+        sum = sum * (n + 1);
+    }
+    return sum - i;
+}
+
+
