@@ -39,3 +39,20 @@ export function NonAbunduntSumsFunc(input: number) {
     }
     return total;
 }
+
+
+function getPrimes(maxNumber: number) {
+    let primes: number[] = [];
+    let numbersCrossedOff = new Map<number, boolean>();
+
+    for (let i = 2; i <= maxNumber; i++) {
+        if (!numbersCrossedOff.has(i)) {
+            primes.push(i);
+            numbersCrossedOff.set(i, true);
+            for (let j = i ** i; j < maxNumber; j += i) {
+                numbersCrossedOff.set(j, false);
+            }
+        }
+    }
+    return primes;
+}

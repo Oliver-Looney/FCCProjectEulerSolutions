@@ -28,6 +28,22 @@ export function sieveOfErato(max: number) {
     return primes;
 }
 
+export function getPrimes(max: number) {
+    let primes: number[] = [];
+    let numbersCrossedOff = new Map<number, boolean>();
+    for (let i = 2; i <= max; i++) {
+        if (!numbersCrossedOff.has(i)) {
+            numbersCrossedOff.set(i, true);
+            primes.push(i)
+        }
+        for (let k = 2 * i; k <= max; k += i) {
+            numbersCrossedOff.set(k, false);
+        }
+    }
+    return primes;
+
+}
+
 export function returningEdgeCases(input: number) {
     if (input < 3) {
         return 0;
