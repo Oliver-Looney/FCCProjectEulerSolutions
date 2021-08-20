@@ -1,13 +1,13 @@
-import {getFactorial, getFirstElementOfNthPerm, LexicographicPermutationsFunc} from "./LexicographicPermutations";
+import {getFactorial, getNextElementOfNthPerm, LexicographicPermutationsFunc} from "./LexicographicPermutations";
 import assert from "assert";
 
 
 describe("Testing get first element of nth Perm", () => {
     it("5,[0,1,2]=>2", () => {
-        assert.equal(getFirstElementOfNthPerm(5, [0, 1, 2]), 2)
+        assert.equal(getNextElementOfNthPerm(5, [0, 1, 2]), 2)
     });
     it("699999,[0,1,2,3,4,5,6,7,8,9]=>1", () => {
-        assert.equal(getFirstElementOfNthPerm(699999, [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]), 1)
+        assert.equal(getNextElementOfNthPerm(699999, [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]), 1)
     });
 });
 
