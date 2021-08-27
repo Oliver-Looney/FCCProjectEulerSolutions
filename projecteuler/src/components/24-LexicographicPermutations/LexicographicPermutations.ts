@@ -1,15 +1,16 @@
 export function LexicographicPermutationsFunc(input: number) {
     let elements = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
-    let result = "";
+    let result = [];
     let j: number;
-
-    let lengthOfElements = elements.length;
-    for (let i = 0; i < elements.length; i++) {
-        j = countFirstXPerms(input, getFactorial(elements.length - i - 1));
-        return j;
+    let i = 0;
+    while (i < 9) {
+        [input, j] = countFirstXPerms(input, getFactorial(9 - i));
+        result.push(elements[j]);
+        elements = removeElement(elements, j);
+        i++;
     }
-
-    return (parseInt(result));
+    result.push(elements[0]);
+    return (parseInt(result.join("")));
 }
 
 function countFirstXPerms(input: number, numberOfPerms: number) {
@@ -18,8 +19,8 @@ function countFirstXPerms(input: number, numberOfPerms: number) {
         input -= numberOfPerms;
         count++;
     }
-    while (input > numberOfPerms);
-    return count;
+    while (input >= numberOfPerms);
+    return [input, count];
 }
 
 export function getNextElementOfNthPerm(input: number, elements: number[]) {
