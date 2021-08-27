@@ -1,3 +1,14 @@
 export function DigitFibonaciNumberFunc(nDigits: number) {
-    return -1;
+    let a = 1;
+    let b = 1;
+    let count = 2;
+    let nextFib: number;
+    do {
+        nextFib = a + b;
+        b = a;
+        a = nextFib;
+        count++;
+    }
+    while (nextFib.toString().length !== nDigits);
+    return count;
 }
