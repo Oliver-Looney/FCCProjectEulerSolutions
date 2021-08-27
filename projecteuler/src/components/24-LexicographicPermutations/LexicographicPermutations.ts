@@ -2,30 +2,38 @@ export function LexicographicPermutationsFunc(input: number) {
     let elements = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
     let result = [];
     let j: number;
+    let outputs = []
     let i = 0;
     while (i < 9) {
         [input, j] = countFirstXPerms(input, getFactorial(9 - i));
         result.push(elements[j]);
         elements = removeElement(elements, j);
         i++;
+        outputs.push([input, "\t", elements]);
+        if (input === 0) {
+            break;
+        }
     }
-    result.push(elements[0]);
+    for (let i = 0; i < elements.length; i++) {
+        result.push(elements[i]);
+    }
+    //return  outputs.join("\n");
     return (parseInt(result.join("")));
 }
 
 function countFirstXPerms(input: number, numberOfPerms: number) {
+    const x = input;
     let count = 0;
     do {
         input -= numberOfPerms;
         count++;
     }
-    while (input >= numberOfPerms);
+    while (input - numberOfPerms >= 0);
+    //x % numberOfPerms === 0
+    if (x % numberOfPerms === 0) {
+        return [0, count];
+    }
     return [input, count];
-}
-
-export function getNextElementOfNthPerm(input: number, elements: number[]) {
-    const index = Math.trunc((input - 1) / getFactorial(elements.length - 1));
-    return index;
 }
 
 function removeElement(elements: number[], indexToRemove: number) {
@@ -35,7 +43,6 @@ function removeElement(elements: number[], indexToRemove: number) {
             newElements.push(elements[i]);
         }
     }
-
     return newElements;
 }
 
